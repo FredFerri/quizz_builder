@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>MyCompany - ZyPop Web Templates</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Main CSS --> 
+        <link rel="stylesheet" href="style.css">s
+        <link rel="stylesheet" type="text/css" href="custom.css">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>        
+    </head>
+  
+    <body>
+
+         <!-- Main navigation -->
+        <div id="sidebar">
+                      
+            <div class="navbar-expand-md navbar-dark"> 
+            
+                <header class="d-none d-md-block">
+                    <h1><span>my</span>website</h1>
+                </header>
+                
+                
+                <!-- Mobile menu toggle and header -->
+                <div class="mobile-header-controls">
+                    <a class="navbar-brand d-md-none d-lg-none d-xl-none" href="#"><span>my</span>website</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#SidebarContent" aria-controls="SidebarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+         
+                <div id="SidebarContent" class="collapse flex-column navbar-collapse">
+ 
+                        
+                    
+                    <!-- Main navigation items -->
+                    <nav class="navbar navbar-dark">
+                        <div id="mainNavbar">
+<!--                             <ul class="flex-column mr-auto">
+                                <li class="nav-item">
+                                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                </li>
+
+                                <li class="nav-item active dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#MenuDropdown" data-toggle="collapse" aria-controls="MenuDropdown" aria-expanded="false">Examples &amp; Pages</a>
+                                            <ul id="MenuDropdown" class="sub-navbar collapse flex-column">
+                                                <li class="nav-item"><a class="nav-link" href="examples.html">Style Examples</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="three-column.html">Three Column</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="one-column.html">One column / no sidebar</a></li>
+                                                <li class="nav-item"><a class="nav-link"  href="text.html">Text / left sidebar</a></li>
+                                                <li class="nav-item"><a class="nav-link"  href="index-right.html">Right navigation</a></li>
+                                            </ul>
+                                </li>
+
+
+                                <li class="nav-item">
+                                        <a class="nav-link" href="#">Services</a>
+                                </li>
+
+                                <li class="nav-item">
+                                        <a class="nav-link" href="#">Products</a>
+                                </li>
+
+                                <li class="nav-item">
+                                        <a class="nav-link" href="#">Contact</a>
+                                </li>
+                            </ul> -->
+                        </div>   
+                    </nav>
+                
+                </div>
+            </div> 
+        </div>
+    
+        
+        <div id="content">
+            <div id="content-wrapper">
+
+                <!-- Jumbtron / Slider -->
+                <div class="jumbotron-wrap">
+                    <div class="container-fluid">
+                        <div class="jumbotron static-slider">
+                            <h1 class="text-center">One column layout</h1>
+                            <p class="lead text-center">With a static slider.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main content area -->
+                <main class="container-fluid">
+                    <div class="row">
+                        <div id="app" class="col main-content">
+                        	<form action="submitQuizz" method="post">
+	                            <questionblock
+	                            v-for="(question, index) in questionsList"
+	                            :is="questionType"
+	                            v-bind:question_prop="question"
+	                            v-bind:question_index="index"
+	                            v-bind:key="question.Hash"
+	                            @add="addQuestion"
+	                            @remove="removeQuestion(index)">
+	                            </questionblock>
+                                <a href="#" class="submit-form" v-on:click="submitForm">Valider le questionnaire</a>
+	                        </form>
+                        </div>
+                    </div> 
+                </main>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+
+            let questionblock = Vue.component('questionblock', {
+                delimiters: ['[[', ']]'],
+                data: function() {
+                    return {
+                        answersList: [{'Hash': new Date().getTime()}],
+                        answerType: answerblock,
+                    }
+                },
+                props: ['question_prop', 'question_index'],
+                methods: {
+                    addQuestion() {
+                        app.questionsList.push({'Hash': new Date().getTime()});
+                    },
+                    removeQuestion(index) {
+                        app.questionsList.splice(index,1);
+                     },
+
+                    addAnswer() {
+                        this.answersList.push({'Hash': new Date().getTime()});
+                    },    
+
+                    removeAnswer(index) {
+                        this.answersList.splice(index, 1);
+                    }  
+                },
+                template: `<div class="block-question">                   
+                            <legend>Question [[ question_index+1 ]]</legend>
+                            <span class="num-question d-inline-block">[[ question_index+1 ]]</span>
+                            <textarea v-bind:id="'quest_'+question_index" class="form-control question-control d-inline-block" v-bind:name="'quest_'+question_index" placeholder="Entrez votre question"></textarea>
+                            <input type="hidden" v-bind:value="question_index">
+                            <i class="fas fa-plus-circle" @click.prevent="addQuestion"></i>
+                            <i class="fas fa-trash" @click.prevent="removeQuestion(question_index)"></i>
+                            <answerblock v-for="(answer, index) in answersList" v-bind:answer_prop="answer" :key="answer.Hash" v-bind:question_index="question_index" v-bind:index_prop="index" :is="answerType" @remove="removeAnswer(index)" @addAnswer="addAnswer"></answerblock>
+                        </div>`
+            });
+
+            let answerblock = Vue.component('answerblock', {
+                delimiters: ['[[', ']]'],
+                props: ['answer_prop', 'index_prop', 'question_index'],
+                methods: {
+                    addAnswer() {
+                        this.$emit('addAnswer');
+                    },
+
+                    removed() {
+                        this.$emit('remove');
+                    }
+                },
+                template: `<div class="block-answer" ref="elt">
+                            <span class="num-answer d-inline-block">[[ index_prop+1 ]]</span>
+                            <textarea class="form-control answer-control d-inline-block" type="text" v-bind:name="'answ_'+question_index+'_'+index_prop" placeholder="Entrez votre réponse"></textarea>
+                            <select class="answer_coeff">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="4">5</option>
+                            </select>
+                            <i class="fas fa-plus-circle" @click.prevent="addAnswer"></i>
+                            <i class="fas fa-trash" @click.prevent="removed(index_prop)"></i>
+                        </div>`
+            });
+
+            var app = new Vue({
+                delimiters: ['[[', ']]'],
+                components: {questionblock, answerblock},
+                el: '#app',
+                data: {
+                    start_id: document.getElementById('app').getAttribute('data'),
+                    id_question: 1,
+                    questionsList: [{'Hash': new Date().getTime()}],
+                    questionType: questionblock
+                },
+                methods: {
+                    addQuestion() {
+                        alert('add');
+                        questionsList.push(questionblock);
+                    },
+                    removeQuestion(index) {
+                        questionsList.splice(index,1);
+                    },
+                    submitForm() {
+                        var jsonResponse = {"name": "Quizz test", "description": "Description pour le quizz test"};
+                        var questions = document.getElementsByClassName('question-control');
+                        var questionBlocks = document.getElementsByClassName('block-question');
+                        var questionsList = {};
+                        var q_count = 0;
+                        for (var q_block of questionBlocks) {
+                            var q_name = $(q_block).find('.question-control')[0].name;
+                            q_content = $(q_block).find('.question-control')[0].value;
+                            var questionObj = {"content": q_content};
+                            var answers = $(q_block).find('.block-answer > .answer-control');
+                            questionObj['answers'] = {};
+                            var a_count = 0;
+                            for (var answer of answers) {
+                                a_name = answer.name;
+                                a_content = answer.value;
+                                a_coeff = $(answer).next('.answer_coeff').val();
+                                answerObj = {};
+                                answerObj = {"content": a_content, "coeff": a_coeff};
+                                questionObj['answers'][a_count] = answerObj;
+                                ++a_count;
+                            }
+                            questionsList[q_count] = questionObj;
+                            ++q_count;
+                        }
+                        jsonResponse.questions = questionsList;
+                        console.dir(JSON.stringify(jsonResponse));
+
+                        $.ajax({
+                            url: '/quizzs',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            type: 'POST',
+                            dataType: 'json',
+                            data: JSON.stringify(jsonResponse),
+                            success: function(result) {
+                                console.dir(result);
+                                alert(result.response);                                
+                            },
+                            error: function(jqxhr, status, exception) {
+                                alert('Exception: ' + exception);
+                            }
+                        })     
+                    }
+                }                
+            });
+        </script>
+
+<!--         <script type="text/javascript">
+        	$('.submit-form').on('click', function() {
+        		$('.question-control').each(function(){
+        			// alert($(this).val());
+        		});
+        	});
+        </script> -->
+
+    </body>
+</html>

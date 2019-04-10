@@ -1,0 +1,47 @@
+.form-control {
+	margin: 15px 10px;
+}
+
+.block-question {
+	display: block;
+	margin: 60px auto;
+}
+
+.num-answer {
+	font-size: 30px;
+	display: inline-block;
+	color: #000;
+	font-family: "Poppins", sans-serif;
+}
+
+.num-question {
+	font-size: 40px;
+	display: inline-block;
+	color: rgb(162, 95, 141);
+	font-family: "Poppins", sans-serif;
+}
+
+.block-question, .block-answer {
+	text-align: center;
+}
+
+.question-control {
+	width: 60%;
+	vertical-align: middle;
+}
+
+.answer-control {
+	width: 50%;
+	vertical-align: middle;
+}
+
+.fa-plus-circle, .fa-trash {
+	font-size: 25px;
+	opacity: 0.3;
+	cursor: pointer;
+	margin: auto 5px;
+}
+
+.fa-plus-circle:hover, .fa-trash:hover {
+	opacity: 1;
+}
