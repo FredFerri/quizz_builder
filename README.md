@@ -1,2 +1,2 @@
 # quizz_builder
-Survey builder web application based on Nodejs/Vuejs stack
+Node.js / Express / Vue.js - Survey builder tool
